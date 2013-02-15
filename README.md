@@ -1,22 +1,22 @@
 #Umbraco Semi-Automatic Permissions
 ==================================
 
-Based on the works of Matt Brailsford, Sebastiaan Janssen, Ove Anderson and others this is asimple batch file which prompts the user for the Application Pool name and sets the correct permissions to your local Umbraco install. 
+This is a simple batch file based on the works of Matt Brailsford, Sebastiaan Janssen, Ove Anderson and others which prompts the user for the Application Pool name and sets the correct permissions to your local Umbraco install. 
 
 Easy to be extended and hopefully forked and expanded upon!
 
 I take no credit in the initial creation of this script simply the extension and addtion of the user-prompt-ability.
 
 Notes: 
-* It could use some more tweaking for individual directory structures, 
+* It would need individual directory structure verification, 
 * built for Umbraco 4.11.x using MVC (hence the *views* directory path)
 * **NOT** tested on v6.x but it shoud be a good place to start!
 
 Jon - [@precisioncoding](https://twitter.com/precisioncoding)
 
 ##Instructions:
-1. Simply copy this script
-2. And drop it in the following location:
+1. Simply copy this script and check your directory structure
+2. Navigate to and drop it in the following location:
 `C:\Users\[YOUR_USERNAME]\AppData\Roaming\Microsoft\Windows\SendTo\SetUmbracoPermissions.bat`
 3. Then right click on the root folder, and select “Send to > SetUmbracoPermissions.bat” to setup the relevant permissions.
 
