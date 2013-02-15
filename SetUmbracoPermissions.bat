@@ -12,16 +12,30 @@ icacls %1\config /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
 icacls %1\data /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
 icacls %1\fonts /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)RX
 icacls %1\images /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
-icacls %1\macroscripts /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
 icacls %1\masterpages /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
 icacls %1\media /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
 icacls %1\umbraco /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
 icacls %1\usercontrols /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)R
 icacls %1\xslt /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
-icacls %1\views /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
 icacls %1\web.config /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
 icacls %1\web.config /grant "IIS APPPOOL\%UserAppPoolName%":M
 
+REM If you are using MVC in Umbraco 4.x.y then you need the following action:
+SET /P MODEL=Are you using MVC in Umbraco 4.x.y or greater? (Y/N)?
+if /i {%MODEL%}=={y} (goto :yes-model)
+if /i {%MODEL%}=={yes} (goto :yes-model)
+goto :no-model
+
+:yes-model
+icacls %1\macroscripts /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
+icacls %1\views /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
+goto :styling
+
+:no-model
+icacls %1\python /grant "IIS APPPOOL\%UserAppPoolName%":(OI)(CI)M
+goto :styling
+
+:styling
 REM If you have renamed your stylesheet directory you need the following action:
 SET /P STYLES=Have you changed your stylesheet directory location? (Y/N)?
 if /i {%STYLES%}=={y} (goto :yes-styles)
