@@ -1,28 +1,12 @@
 @echo off
 
-:: BatchGotAdmin
-:-------------------------------------
-REM  --> Check for permissions
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+:: Check Location 
+echo Current Directory is %cd%
+echo Current batch run is %0
+echo Subject is %1
 
-REM --> If error flag set, we do not have admin.
-if '%errorlevel%' NEQ '0' (
-    echo Requesting administrative privileges...
-    goto UACPrompt
-) else ( goto gotAdmin )
+pause  
 
-:UACPrompt
-    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-    echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
-
-    "%temp%\getadmin.vbs"
-    exit /B
-
-:gotAdmin
-    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
-    pushd "%CD%"
-    CD /D "%~dp0"
-:--------------------------------------
 :: SetUmbracoPermissions
 
 SET /P W2K8=Are you hosting Umbraco on Windows Server 2008 or newer? (Y/N)?
@@ -55,7 +39,6 @@ icacls %1\media /grant "%AccessUserName%":(OI)(CI)M
 icacls %1\umbraco /grant "%AccessUserName%":(OI)(CI)M
 icacls %1\usercontrols /grant "%AccessUserName%":(OI)(CI)R
 icacls %1\xslt /grant "%AccessUserName%":(OI)(CI)M
-icacls %1\web.config /grant "%AccessUserName%":(OI)(CI)M
 icacls %1\web.config /grant "%AccessUserName%":M
 
 REM :mvc
