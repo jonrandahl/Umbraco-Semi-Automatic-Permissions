@@ -29,7 +29,7 @@ if /i {%ANSWER%}=={y} (goto :yes)
 if /i {%ANSWER%}=={yes} (goto :yes)
 goto :no
 :yes
-icacls robots.txt /grant "IIS APPPOOL\%UserAppPoolName%":M
+icacls %1\robots.txt /grant "IIS APPPOOL\%UserAppPoolName%":M
 PAUSE
 exit /b 0
 
